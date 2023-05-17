@@ -1,7 +1,7 @@
 package ru.skypro.lessons.springboot.test.service;
 
 public interface EmployeeService {
-    double getSumOfSalary();
+    int getSumOfSalary();
     String getMinSalary();
     String getMaxSalary();
     String getHighSalary();
