@@ -17,7 +17,7 @@ public class Employee {
     @Positive
     private int salary;
     @JoinColumn (name = "position_id")
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private Position position;
 
 }
