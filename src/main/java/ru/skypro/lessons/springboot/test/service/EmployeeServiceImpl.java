@@ -1,18 +1,20 @@
 package ru.skypro.lessons.springboot.test.service;
 
-import lombok.ToString;
+import lombok.AllArgsConstructor;
+import lombok.SneakyThrows;
+
 import org.springframework.stereotype.Service;
 import ru.skypro.lessons.springboot.test.model.Employee;
 import ru.skypro.lessons.springboot.test.repository.EmployeeRepositoryImpl;
 
-@ToString
+import java.util.*;
+
+@AllArgsConstructor
 @Service
 public class EmployeeServiceImpl implements EmployeeService{
     private final EmployeeRepositoryImpl employeeRepository;
 
-    public EmployeeServiceImpl(EmployeeRepositoryImpl employeeRepository) {
-        this.employeeRepository = employeeRepository;
-    }
+
 
     @Override
     public int getSumOfSalary() {
@@ -67,5 +69,40 @@ public class EmployeeServiceImpl implements EmployeeService{
             }
         }
         return person+" "+salaryMaximum;
+    }
+
+    @Override
+
+    public void addEmployee(List<Employee> employee) {
+        employeeRepository.addEmployee(employee);
+    }
+
+    @Override
+    @SneakyThrows
+    public void updateEmployee(Employee employee) {
+        employeeRepository.updateEmployee(employee);
+    }
+    @Override
+    @SneakyThrows
+    public List<Employee> findEmployee(int id) {
+        return employeeRepository.findEmployee(id);
+    }
+
+    @Override
+    @SneakyThrows
+    public void deleteEmployee(int id) {
+        employeeRepository.deleteEmployee(id);
+
+    }
+
+    @Override
+    public List<Employee> findAllEmployeesHigherThanSalary(int salary) {
+        List<Employee> newList = new ArrayList<>();
+        for (Employee employee : employeeRepository.getAllEmployees()) {
+            if (employee.getSalary() > salary) {
+                newList.add(employee);
+            }
+        }
+        return newList;
     }
 }
