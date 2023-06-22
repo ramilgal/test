@@ -9,15 +9,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
+@Table (name="report")
 public class Report {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 //    @Lob
-    @Column(columnDefinition = "clob")
-    private String report;
+//    (Если его включить, выходит ошибка: "Большие объекты не могут использоваться в режиме авто-подтверждения (auto-commit)."
+    @Column (name = "file_path")
+//            (columnDefinition = "clob")
+    private String filePath;
 
-    public Report(String report) {
-        this.report = report;
+    public Report(String filePath) {
+        this.filePath = filePath;
     }
 }
