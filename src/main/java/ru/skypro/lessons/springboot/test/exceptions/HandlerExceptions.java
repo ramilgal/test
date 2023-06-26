@@ -13,6 +13,12 @@ public class HandlerExceptions {
 exception.printStackTrace();
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
+    @ExceptionHandler (IllegalJsonFileException.class)
+
+    public ResponseEntity<?> badRequest() {
+        System.out.println("Err");
+        return ResponseEntity.badRequest().build();
+    }
 //    @ExceptionHandler(value = {IOException.class, RuntimeException.class})
 //    public ResponseEntity<?> employeeNotFoundException() {
 //

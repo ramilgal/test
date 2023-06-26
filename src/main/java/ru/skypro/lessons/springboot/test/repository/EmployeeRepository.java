@@ -4,7 +4,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
-import ru.skypro.lessons.springboot.test.dto.EmployeeDTO;
 import ru.skypro.lessons.springboot.test.model.Employee;
 import ru.skypro.lessons.springboot.test.service.EmployeeView;
 
@@ -39,10 +38,5 @@ public interface EmployeeRepository extends CrudRepository<Employee, Integer>, P
 
     @Query(value = "SELECT * FROM employee e LEFT JOIN position p ON e.position_id=p.id where p.position=:NewName", nativeQuery = true)
     Employee findEmployeeByNameLikeThis(@Param("NewName") String name);
-
-
-
-
-
 
 }
