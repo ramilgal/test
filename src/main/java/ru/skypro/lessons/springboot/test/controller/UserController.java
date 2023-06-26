@@ -10,9 +10,9 @@ import ru.skypro.lessons.springboot.test.service.EmployeeService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/admin/employees")
+@RequestMapping("/user/employees")
 @AllArgsConstructor
-public class AdminController {
+public class UserController {
     private final EmployeeService employeeService;
 
     @GetMapping("/findAllEmployees")

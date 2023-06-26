@@ -91,10 +91,10 @@ public class EmployeeController {
     employeeService.deleteEmployee(id);
     }
 
-    @GetMapping("/findAllEmployees")
-    List<Employee> findAllEmployees(){
-        return employeeService.getAllEmployees();
-    }
+//    @GetMapping("/findAllEmployees")
+//    List<Employee> findAllEmployees(){
+//        return employeeService.getAllEmployees();
+//    }
     @GetMapping
     List<EmployeeDTO> findAllEmployeesHigherThanSalary(@RequestParam ("testSalary") int testSalary){
     return employeeService.findAllEmployeesHigherThanSalary(testSalary);
