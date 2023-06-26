@@ -4,7 +4,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.web.multipart.MultipartFile;
 import ru.skypro.lessons.springboot.test.dto.EmployeeDTO;
 import ru.skypro.lessons.springboot.test.model.Employee;
+import ru.skypro.lessons.springboot.test.model.Report;
+import springfox.documentation.spring.web.json.Json;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface EmployeeService {
@@ -30,5 +33,5 @@ public interface EmployeeService {
 
     void upload(MultipartFile file);
     Integer report() throws JsonProcessingException;
-    String getReportById(Integer id);
+     String getReportById(Integer id) throws IOException;
 }

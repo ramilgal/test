@@ -16,7 +16,7 @@ public interface ReportRepository extends CrudRepository<Report, Integer> {
     List<ReportDTO> getReport();
 
     @Query("SELECT r FROM Report r where r.id= :searchId")
-    String findReportById(@Param("searchId") Integer searchId);
+    Report findReportById(@Param("searchId") Integer searchId);
 
 
 

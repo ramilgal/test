@@ -20,6 +20,12 @@ import ru.skypro.lessons.springboot.test.repository.EmployeeRepository;
 import ru.skypro.lessons.springboot.test.repository.ReportRepository;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @AllArgsConstructor
@@ -43,19 +49,25 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     @Override
     public Integer report() throws JsonProcessingException {
+        Path path = Paths.get("report" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MM_yyyy_HH_mm_ss_SSSSSS")) +".json");
         List<ReportDTO> tempList = reportRepository.getReport();
         String json = objectMapper.writeValueAsString(tempList);
-        Report report = new Report(json);
+        writeTextToFile(json, path);
+        Report report = new Report(path.toAbsolutePath().toString());
         return reportRepository.save(report).getId();
+    }
+    private void writeTextToFile(String json, Path path) {
+        try {
+            Files.write(path, json.getBytes(StandardCharsets.UTF_8));
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
     }
 
     @Override
-    public String getReportById(Integer id) {
-        return reportRepository.findReportById(id);
+    public String getReportById(Integer id) throws IOException {
+        return String.join("", Files.readAllLines(Path.of(reportRepository.findReportById(id).getFilePath())));
     }
-
-
-
 
     @Override
     public void addEmployees(List<EmployeeDTO> employeeDTO) {

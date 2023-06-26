@@ -19,6 +19,7 @@ import ru.skypro.lessons.springboot.test.service.EmployeeService;
 import ru.skypro.lessons.springboot.test.service.EmployeeView;
 
 
+import java.io.IOException;
 import java.util.List;
 
 
@@ -40,7 +41,7 @@ public class EmployeeController {
         return employeeService.report();
     }
     @GetMapping("/findReportById/{id}")
-    public ResponseEntity<Resource> getReportById(@PathVariable Integer id) {
+    public ResponseEntity<Resource> getReportById(@PathVariable Integer id) throws IOException {
         String fileName = "report.json";
         String json = employeeService.getReportById(id);
         Resource resource = new ByteArrayResource(json.getBytes());
