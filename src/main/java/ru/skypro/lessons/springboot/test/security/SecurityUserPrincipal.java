@@ -1,13 +1,16 @@
 package ru.skypro.lessons.springboot.test.security;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import ru.skypro.lessons.springboot.test.model.AuthUser;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
 @AllArgsConstructor
 
 public class SecurityUserPrincipal implements UserDetails {
@@ -16,7 +19,9 @@ public class SecurityUserPrincipal implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        List<GrantedAuthority> list = new ArrayList<>();
+        list.add(new SimpleGrantedAuthority(user.getRole().getAuthority()));
+        return list;
     }
 
     @Override
