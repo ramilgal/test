@@ -15,6 +15,6 @@ public class Position {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @NotBlank(message = "Введите должность")
+    @Column(nullable = false, length = 50)
     private String position;
 }

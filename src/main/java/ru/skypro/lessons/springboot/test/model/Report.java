@@ -16,7 +16,7 @@ public class Report {
     private Integer id;
 //    @Lob
 //    (Если его включить, выходит ошибка: "Большие объекты не могут использоваться в режиме авто-подтверждения (auto-commit)."
-    @Column (name = "file_path")
+    @Column(name = "file_path", nullable = false, length = 50)
 //            (columnDefinition = "clob")
     private String filePath;
 
