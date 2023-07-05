@@ -5,11 +5,6 @@
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
 
 <changeSet id="fill-authorities-table" author="Ramil Galimov">
-<!--    <preConditions>-->
-<!--        <not>-->
-<!--            <tableExists tableName="auth_user"/>-->
-<!--        </not>-->
-<!--    </preConditions>-->
     <insert tableName="authorities">
         <column name="authority">ROLE_USER</column>
     </insert>
