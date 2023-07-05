@@ -14,10 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ru.skypro.lessons.springboot.test.dto.EmployeeDTO;
 import ru.skypro.lessons.springboot.test.model.Employee;
-import ru.skypro.lessons.springboot.test.model.Report;
 import ru.skypro.lessons.springboot.test.service.EmployeeService;
 import ru.skypro.lessons.springboot.test.service.EmployeeView;
-
 
 import java.io.IOException;
 import java.util.List;
@@ -76,6 +74,7 @@ public class EmployeeController {
     //Методы со старых домашек:
     @PostMapping
     void addEmployee(@RequestBody @Valid EmployeeDTO employeeDTO){
+
         employeeService.addEmployee(employeeDTO);
     }
     @PutMapping
