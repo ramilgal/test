@@ -1,0 +1,24 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+
+<changeSet id="fill-auth_user-table" author="Ramil Galimov">
+<!--    <preConditions>-->
+<!--        <not>-->
+<!--            <tableExists tableName="auth_user"/>-->
+<!--        </not>-->
+<!--    </preConditions>-->
+    <insert tableName="auth_user">
+        <column name="username">Ivan</column>
+        <column name="password">$2a$10$02ZIzsUg1Qlv3kfCxdC/nuuFIbI0mfshFHaG.jIYVml9VT5hu.jGS</column>
+        <column name="role_id">1</column>
+    </insert>
+    <insert tableName="auth_user">
+        <column name="username">admin</column>
+        <column name="password">$2a$04$93XXCLh3zJ1QVFK6pIjO3uxmr8KS3eULWNcJ9nxMWvAE41g7./I3u</column>
+        <column name="role_id">2</column>
+    </insert>
+</changeSet>
+</databaseChangeLog>

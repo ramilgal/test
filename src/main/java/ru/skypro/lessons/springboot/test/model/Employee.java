@@ -13,6 +13,7 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @NotBlank (message = "Введите имя")
+    @Column(nullable = false, length = 50)
     private String name;
     @Positive
     private int salary;

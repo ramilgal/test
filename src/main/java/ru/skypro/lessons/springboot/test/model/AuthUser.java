@@ -15,9 +15,9 @@ public class AuthUser {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, length = 50)
     private String username;
-
+    @Column(nullable = false, length = 70)
     private String password;
     @JoinColumn (name = "role_id")
     @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)

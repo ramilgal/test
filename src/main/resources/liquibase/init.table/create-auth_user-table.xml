@@ -1,0 +1,33 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+
+<changeSet id="create-auth_user-table" author="Ramil Galimov">
+    <preConditions>
+        <not>
+            <tableExists tableName="auth_user"/>
+        </not>
+    </preConditions>
+    <createTable tableName="auth_user">
+        <column name="id" type="INT" autoIncrement="true">
+        </column>
+        <column name="username" type="VARCHAR(50)">
+            <constraints nullable="false" unique="true" primaryKey="true"/>
+        </column>
+        <column name="password" type="VARCHAR(70)">
+            <constraints nullable="false"/>
+        </column>
+        <column name="role_id" type="INT">
+        </column>
+    </createTable>
+    <addForeignKeyConstraint baseTableName="auth_user"
+                             baseColumnNames="role_id"
+                             constraintName="FK_role_id_id"
+                             referencedTableName="authorities"
+                             referencedColumnNames="id"/>
+</changeSet>
+
+
+</databaseChangeLog>
