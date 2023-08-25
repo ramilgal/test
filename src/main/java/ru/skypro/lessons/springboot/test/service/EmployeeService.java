@@ -24,14 +24,18 @@ public interface EmployeeService {
     List<EmployeeView> getFullInfo(int id);
     List<Employee> getEmployeeWithPaging(int pageIndex, int eployeesInPage);
     List<Employee> getAllEmployees();
-    int getSumOfSalary();
-    int getMinSalary();
-    int getMaxSalary();
-    String getHighSalary();
-    int getAverageSalary();
+
 
 
     void upload(MultipartFile file);
     Integer report() throws JsonProcessingException;
      String getReportById(Integer id) throws IOException;
+
+
+    //Старые методы:
+//    int getSumOfSalary();
+//    int getMinSalary();
+//    int getMaxSalary();
+//    String getHighSalary();
+//    int getAverageSalary();
 }

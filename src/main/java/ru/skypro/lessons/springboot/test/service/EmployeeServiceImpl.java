@@ -38,7 +38,8 @@ public class EmployeeServiceImpl implements EmployeeService{
     private final ReportRepository reportRepository;
     private static final Logger logger = LoggerFactory.getLogger(EmployeeServiceImpl.class);
     @Override
-    public void upload(MultipartFile file) {
+    public void
+    upload(MultipartFile file) {
         logger.info("Was invoked method for upload report " + file);
         try {
             String extension = StringUtils.getFilenameExtension(file.getOriginalFilename());
@@ -68,7 +69,7 @@ public class EmployeeServiceImpl implements EmployeeService{
         try {
             Files.write(path, json.getBytes(StandardCharsets.UTF_8));
         } catch (IOException ioException) {
-            logger.error("There is catching IOException in the metod <writeTextToFile> = " + ioException);
+            logger.error("There is catching IOException in the method <writeTextToFile> = " + ioException);
             ioException.printStackTrace();
         }
     }
@@ -80,7 +81,8 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     @Override
-    public void addEmployees(List<EmployeeDTO> employeeDTO) {
+    public void
+    addEmployees(List<EmployeeDTO> employeeDTO) {
         logger.info("Was invoked method for add Employees to list " + employeeDTO);
         employeeRepository.saveAll(employeeDTO
                 .stream()
@@ -171,67 +173,67 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     //Старые методы:
-    @Override
-    public int getSumOfSalary() {
-        logger.info("Was invoked method for get Sum Of Salary" );
-    int sum = 0;
-        for (Employee employees: employeeRepository.findAllEmployees())
-        {sum = sum+employees.getSalary();
-        }
-        System.out.println("Сумма всех зарплат: " + sum);
-        return sum;
-    }
-
-    @Override
-    public int getMinSalary() {
-        logger.info("Was invoked method for get  Min Salary" );
-        int salaryMinimum = Integer.MAX_VALUE;
-        for (Employee employees : employeeRepository.findAllEmployees()) {
-            if (employees.getSalary() < salaryMinimum) {
-            salaryMinimum = employees.getSalary();
-            }
-        }
-        return salaryMinimum;
-    }
-
-    @Override
-    public int getMaxSalary() {
-        logger.info("Was invoked method for get Max Salary" );
-        int salaryMaximum = 0;
-        for (Employee employees : employeeRepository.findAllEmployees()) {
-            if (employees.getSalary() > salaryMaximum) {
-                salaryMaximum = employees.getSalary();
-            }
-        }
-        return salaryMaximum;
-    }
-
-    @Override
-    public String getHighSalary() {
-        logger.info("Was invoked method for get High Salary" );
-        int sum = 0;
-        int averageSalary;
-        int salaryMaximum = 0;
-        String person = null;
-        for (Employee employees : employeeRepository.findAllEmployees()) {
-            sum = sum + employees.getSalary();
-        }
-        averageSalary = sum / employeeRepository.findAllEmployees().size();
-        for (Employee employees : employeeRepository.findAllEmployees()) {
-            if (employees.getSalary() > averageSalary) {
-                person = employees.getName();
-                salaryMaximum = employees.getSalary();
-            }
-        }
-        return person+" "+salaryMaximum;
-    }
-
-    @Override
-    public int getAverageSalary() {
-        logger.info("Was invoked method for get Average Salary" );
-        int averageSalary = getSumOfSalary()/employeeRepository.findAllEmployees().size();
-        return averageSalary;
-    }
+//    @Override
+//    public int getSumOfSalary() {
+//        logger.info("Was invoked method for get Sum Of Salary" );
+//    int sum = 0;
+//        for (Employee employees: employeeRepository.findAllEmployees())
+//        {sum = sum+employees.getSalary();
+//        }
+//        System.out.println("Сумма всех зарплат: " + sum);
+//        return sum;
+//    }
+//
+//    @Override
+//    public int getMinSalary() {
+//        logger.info("Was invoked method for get  Min Salary" );
+//        int salaryMinimum = Integer.MAX_VALUE;
+//        for (Employee employees : employeeRepository.findAllEmployees()) {
+//            if (employees.getSalary() < salaryMinimum) {
+//            salaryMinimum = employees.getSalary();
+//            }
+//        }
+//        return salaryMinimum;
+//    }
+//
+//    @Override
+//    public int getMaxSalary() {
+//        logger.info("Was invoked method for get Max Salary" );
+//        int salaryMaximum = 0;
+//        for (Employee employees : employeeRepository.findAllEmployees()) {
+//            if (employees.getSalary() > salaryMaximum) {
+//                salaryMaximum = employees.getSalary();
+//            }
+//        }
+//        return salaryMaximum;
+//    }
+//
+//    @Override
+//    public String getHighSalary() {
+//        logger.info("Was invoked method for get High Salary" );
+//        int sum = 0;
+//        int averageSalary;
+//        int salaryMaximum = 0;
+//        String person = null;
+//        for (Employee employees : employeeRepository.findAllEmployees()) {
+//            sum = sum + employees.getSalary();
+//        }
+//        averageSalary = sum / employeeRepository.findAllEmployees().size();
+//        for (Employee employees : employeeRepository.findAllEmployees()) {
+//            if (employees.getSalary() > averageSalary) {
+//                person = employees.getName();
+//                salaryMaximum = employees.getSalary();
+//            }
+//        }
+//        return person+" "+salaryMaximum;
+//    }
+//
+//    @Override
+//    public int getAverageSalary() {
+//        logger.info("Was invoked method for get Average Salary" );
+//        int averageSalary = getSumOfSalary()/employeeRepository.findAllEmployees().size();
+//        return averageSalary;
+//    }
 
 
 

@@ -100,20 +100,20 @@ public class EmployeeController {
     }
 
 
-    @GetMapping("/salary/sum")
-    public double getSumOfSalary() {
-       return employeeService.getSumOfSalary();
-    }
-    @GetMapping("/salary/min")
-    public int getMinSalary() {return employeeService.getMinSalary();}
-    @GetMapping("/salary/max")
-    public int getMaxSalary() {
-        return employeeService.getMaxSalary();
-    }
-    @GetMapping("/high-salary")
-    public String getHighSalary() {
-        return employeeService.getHighSalary();
-    }
-    @GetMapping("/salary/averageSalary")
-    public int getAverageSalary() {return employeeService.getAverageSalary();}
+//    @GetMapping("/salary/sum")
+//    public double getSumOfSalary() {
+//       return employeeService.getSumOfSalary();
+//    }
+//    @GetMapping("/salary/min")
+//    public int getMinSalary() {return employeeService.getMinSalary();}
+//    @GetMapping("/salary/max")
+//    public int getMaxSalary() {
+//        return employeeService.getMaxSalary();
+//    }
+//    @GetMapping("/high-salary")
+//    public String getHighSalary() {
+//        return employeeService.getHighSalary();
+//    }
+//    @GetMapping("/salary/averageSalary")
+//    public int getAverageSalary() {return employeeService.getAverageSalary();}
 }
