@@ -131,9 +131,10 @@ public class EmployeeServiceImpl implements EmployeeService{
     public List<Employee> getAllEmployees() {
         logger.debug("Was invoked method for getAllEmployees ");
         return employeeRepository.findAllEmployees();
-
     }
-    //Старые методы с прошлой домашки:
+
+
+
     @Override
     public void addEmployee(EmployeeDTO employeeDTO) {
         logger.info("Was invoked method for add one Employee ");

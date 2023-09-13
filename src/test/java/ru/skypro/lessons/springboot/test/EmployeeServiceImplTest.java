@@ -1,41 +1,25 @@
 package ru.skypro.lessons.springboot.test;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.hibernate.annotations.Any;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.util.StringUtils;
-import org.springframework.web.multipart.MultipartFile;
 import ru.skypro.lessons.springboot.test.dto.EmployeeDTO;
-import ru.skypro.lessons.springboot.test.dto.PositionDTO;
-import ru.skypro.lessons.springboot.test.dto.ReportDTO;
-import ru.skypro.lessons.springboot.test.exceptions.IllegalJsonFileException;
 import ru.skypro.lessons.springboot.test.model.Employee;
 import ru.skypro.lessons.springboot.test.model.Report;
 import ru.skypro.lessons.springboot.test.repository.EmployeeRepository;
 import ru.skypro.lessons.springboot.test.repository.ReportRepository;
 import ru.skypro.lessons.springboot.test.service.EmployeeServiceImpl;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
-import static ru.skypro.lessons.springboot.test.constants.ConstantsOfEmployee.*;
+import static ru.skypro.lessons.springboot.test.testdata.ConstantsOfEmployee.*;
 
 @ExtendWith(MockitoExtension.class)
 public class EmployeeServiceImplTest {
@@ -120,13 +104,13 @@ public class EmployeeServiceImplTest {
         verify(employeeRepository, times(0)).findAllEmployees();
         verify(employeeRepository, times(0)).findEmployeeByPositionLike(anyString());
     }
-
+//????????????????????:
     @Test
     public void shouldFindEmployeeByPositionLike_NumberFormatException_AddSearchPosition_ThenReturnCorrectListOfEmployees(){
         when(employeeRepository.findEmployeeByPositionLike(anyString())).thenThrow(NumberFormatException.class);
 
         assertThrows(NumberFormatException.class, ()->employeeRepository.findEmployeeByPositionLike(anyString()));
-
+        verify(employeeRepository, times(0)).findEmployeeByPosition_Id(anyInt());
         verify(employeeRepository, times(1)).findEmployeeByPositionLike(anyString());
     }
 
@@ -134,13 +118,16 @@ public class EmployeeServiceImplTest {
 
     @Test
     public void shouldGetReportById_AddId_ThenReturnCorrectReport(){
-
+when(reportRepository.findReportById(anyInt())).thenReturn(REPORT);
+String actual = e
 
     }
 
 //    public String getReportById(Integer id) throws IOException {
 //        logger.error("There is no employee with id = " + id);
-//        return String.join("", Files.readAllLines(Path.of(reportRepository.findReportById(id).getFilePath())));
+//        return String.join("", Files.readAllLines
+//        (Path.of
+//        (reportRepository.findReportById(id).getFilePath())));
 //    }
 
 
@@ -179,7 +166,74 @@ public class EmployeeServiceImplTest {
 //        return employeeRepository.findAllEmployeesWithHighestSalary();
 //    }
 
+    @Test
+    public void shouldGetFullInfoBiId_ThenReturnListWithFullInfoOfEmployee() {
+        when(employeeRepository.getFullInfoByIdInProection(anyInt())).thenReturn(EMPLOYEE_VIEWS);
 
+        verify(employeeRepository, times(1)).getFullInfoByIdInProection(anyInt());
+    }
+
+
+
+//    @Override
+//    public List<EmployeeView> getFullInfo(int id) {
+//        logger.info("Was invoked method for get employee FullInfo By id " + id);
+//        return employeeRepository.getFullInfoByIdInProection(id);
+//    }
+//
+//    @Override
+//    public List<Employee> getEmployeeWithPaging(int pageIndex, int eployeesInPage) {
+//        logger.info("Was invoked method for getEmployeeWithPaging By pageIndex and  eployeesInPage" + pageIndex + eployeesInPage);
+//        Page<Employee> page = employeeRepository.findAll(PageRequest.of(pageIndex, eployeesInPage));
+//        return page.stream()
+//                .toList();
+//    }
+//
+//    @Override
+//    public List<Employee> getAllEmployees() {
+//        logger.debug("Was invoked method for getAllEmployees ");
+//        return employeeRepository.findAllEmployees();
+//    }
+//
+//
+//
+//    @Override
+//    public void addEmployee(EmployeeDTO employeeDTO) {
+//        logger.info("Was invoked method for add one Employee ");
+//        Employee employee = employeeDTO.toEmployee();
+//        employeeRepository.save(employee);
+//    }
+//
+//    @Override
+//    @SneakyThrows
+//    public void updateEmployee(EmployeeDTO employeeDTO) {
+//        logger.info("Was invoked method for updateEmployee"  + employeeDTO);
+//        employeeRepository.save(employeeDTO.toEmployee());
+//    }
+//    @Override
+//    @SneakyThrows
+//    public Employee findEmployee(int id) {
+//        logger.info("Was invoked method for findEmployee by id"  + id);
+//        return employeeRepository.findById(id);
+//    }
+//
+//    @Override
+//    @SneakyThrows
+//    public void deleteEmployee(int id) {
+//        logger.info("Was invoked method for delete Employee by id"  + id);
+//        employeeRepository.deleteById(id);
+//    }
+//    @Override
+//    public List<EmployeeDTO> findAllEmployeesHigherThanSalary(int testSalary) {
+//        logger.info("Was invoked method for find All Employees церш Higher Salary Than testSalary"  + testSalary);
+//        List<Employee> employees = employeeRepository.findAllBySalaryGreaterThan(testSalary);
+//        List<EmployeeDTO> employeeDTO = new ArrayList<>();
+//        for (Employee employee : employees) {
+//            EmployeeDTO employeeDTO1 = EmployeeDTO.fromEmployee(employee);
+//            employeeDTO.add(employeeDTO1);
+//        }
+//        return employeeDTO;
+//    }
 
 
 
