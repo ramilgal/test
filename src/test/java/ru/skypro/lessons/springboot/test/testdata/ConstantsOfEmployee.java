@@ -28,27 +28,6 @@ public class ConstantsOfEmployee {
         add(EmployeeDTO.fromEmployee(new Employee(4, "test", 45000, new Position(45, "one"))));
         add(EmployeeDTO.fromEmployee(new Employee(5, "test", 45000, new Position(45, "one"))));
     }};
-    public static final List<EmployeeView> EMPLOYEE_VIEWS = new ArrayList<>(){{
-        add(new EmployeeView() {
-            @Override
-            public String getName() {
-                return "Test";
-            }
-            @Override
-            public Integer getSalary() {
-                return 100000;
-            }
-        });
-        add (new EmployeeView() {
-            @Override
-            public String getName() {
-                return "Test1";
-            }
-            @Override
-            public Integer getSalary() {
-                return 110000;
-            }
-        });
-    }};
+
 
 }

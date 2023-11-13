@@ -5,14 +5,20 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import ru.skypro.lessons.springboot.test.dto.EmployeeDTO;
 import ru.skypro.lessons.springboot.test.model.Employee;
 import ru.skypro.lessons.springboot.test.model.Report;
 import ru.skypro.lessons.springboot.test.repository.EmployeeRepository;
 import ru.skypro.lessons.springboot.test.repository.ReportRepository;
 import ru.skypro.lessons.springboot.test.service.EmployeeServiceImpl;
+import ru.skypro.lessons.springboot.test.service.EmployeeView;
 
+import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -107,7 +113,7 @@ public class EmployeeServiceImplTest {
 //????????????????????:
     @Test
     public void shouldFindEmployeeByPositionLike_NumberFormatException_AddSearchPosition_ThenReturnCorrectListOfEmployees(){
-        when(employeeRepository.findEmployeeByPositionLike(anyString())).thenThrow(NumberFormatException.class);
+        when(employeeRepository.findEmployeeByPositionLike(anyString())).thenReturn(Collections.emptyList());
 
         assertThrows(NumberFormatException.class, ()->employeeRepository.findEmployeeByPositionLike(anyString()));
         verify(employeeRepository, times(0)).findEmployeeByPosition_Id(anyInt());
@@ -117,9 +123,14 @@ public class EmployeeServiceImplTest {
 
 
     @Test
-    public void shouldGetReportById_AddId_ThenReturnCorrectReport(){
+    public void shouldGetReportById_AddId_ThenReturnCorrectReport() throws IOException {
 when(reportRepository.findReportById(anyInt())).thenReturn(REPORT);
-String actual = e
+
+String actual = employeeServiceImpl.getReportById(anyInt());
+String expected = "testtest";
+assertThat(actual).isEqualTo(expected);
+
+        verify(reportRepository, times(1)).findReportById(anyInt());
 
     }
 
@@ -152,11 +163,11 @@ String actual = e
     public void shouldFindAllEmployeesWithHighestSalary_ThenReturnListOfEmployeeWithHighestSalary() {
         when(employeeRepository.findAllEmployeesWithHighestSalary()).thenReturn(NEW_EMPLOYEES);
 
-        assertIterableEquals(NEW_EMPLOYEES,employeeServiceImpl.findAllEmployeesWithHighestSalary());
-//        List<Employee> actual = employeeServiceImpl.findAllEmployeesWithHighestSalary();
-//        List<Employee> expected = NEW_EMPLOYEES;
-//
-//        assertThat(actual).isEqualTo(expected);
+//        assertIterableEquals(NEW_EMPLOYEES,employeeServiceImpl.findAllEmployeesWithHighestSalary());
+        List<Employee> actual = employeeServiceImpl.findAllEmployeesWithHighestSalary();
+        List<Employee> expected = NEW_EMPLOYEES;
+
+        assertThat(actual).isEqualTo(expected);
 
         verify(employeeRepository, times(1)).findAllEmployeesWithHighestSalary();
     }
@@ -168,7 +179,16 @@ String actual = e
 
     @Test
     public void shouldGetFullInfoBiId_ThenReturnListWithFullInfoOfEmployee() {
-        when(employeeRepository.getFullInfoByIdInProection(anyInt())).thenReturn(EMPLOYEE_VIEWS);
+        List<EmployeeView> employeeView =List.of(Mockito.mock(EmployeeView.class));
+
+
+
+        when(employeeRepository.getFullInfoByIdInProection(anyInt())).thenReturn(employeeView);
+
+        List<EmployeeView> actual = employeeServiceImpl.getFullInfo(anyInt());
+        List<EmployeeView> expected = employeeView;
+
+        assertThat(actual).isEqualTo(expected);
 
         verify(employeeRepository, times(1)).getFullInfoByIdInProection(anyInt());
     }
@@ -180,7 +200,10 @@ String actual = e
 //        logger.info("Was invoked method for get employee FullInfo By id " + id);
 //        return employeeRepository.getFullInfoByIdInProection(id);
 //    }
-//
+
+
+
+//Page<Employee> page = new PageImpl<>(NEW_EMPLOYEES);     в тестовых данных
 //    @Override
 //    public List<Employee> getEmployeeWithPaging(int pageIndex, int eployeesInPage) {
 //        logger.info("Was invoked method for getEmployeeWithPaging By pageIndex and  eployeesInPage" + pageIndex + eployeesInPage);
