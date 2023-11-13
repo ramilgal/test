@@ -90,30 +90,34 @@ public class EmployeeController {
     employeeService.deleteEmployee(id);
     }
 
-//    @GetMapping("/findAllEmployees")
-//    List<Employee> findAllEmployees(){
-//        return employeeService.getAllEmployees();
-//    }
+    @GetMapping("/findAllEmployees")
+    List<Employee> findAllEmployees(){
+        return employeeService.getAllEmployees();
+    }
     @GetMapping
     List<EmployeeDTO> findAllEmployeesHigherThanSalary(@RequestParam ("testSalary") int testSalary){
     return employeeService.findAllEmployeesHigherThanSalary(testSalary);
     }
 
 
-    @GetMapping("/salary/sum")
-    public double getSumOfSalary() {
-       return employeeService.getSumOfSalary();
-    }
-    @GetMapping("/salary/min")
-    public int getMinSalary() {return employeeService.getMinSalary();}
-    @GetMapping("/salary/max")
-    public int getMaxSalary() {
-        return employeeService.getMaxSalary();
-    }
-    @GetMapping("/high-salary")
-    public String getHighSalary() {
-        return employeeService.getHighSalary();
-    }
-    @GetMapping("/salary/averageSalary")
-    public int getAverageSalary() {return employeeService.getAverageSalary();}
+
+
+
+
+//    @GetMapping("/salary/sum")
+//    public double getSumOfSalary() {
+//       return employeeService.getSumOfSalary();
+//    }
+//    @GetMapping("/salary/min")
+//    public int getMinSalary() {return employeeService.getMinSalary();}
+//    @GetMapping("/salary/max")
+//    public int getMaxSalary() {
+//        return employeeService.getMaxSalary();
+//    }
+//    @GetMapping("/high-salary")
+//    public String getHighSalary() {
+//        return employeeService.getHighSalary();
+//    }
+//    @GetMapping("/salary/averageSalary")
+//    public int getAverageSalary() {return employeeService.getAverageSalary();}
 }
